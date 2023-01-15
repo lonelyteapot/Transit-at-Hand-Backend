@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "transit_at_hand.backend.main.app:app"
+            ],
+            "justMyCode": false
+        }
+    ]
+}
