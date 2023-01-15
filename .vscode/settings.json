@@ -1,0 +1,22 @@
+{
+    // Presentation
+    "editor.rulers": [
+        88
+    ],
+    // Testings
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // Auto-formatting
+    "black-formatter.args": [],
+    "isort.args": [],
+    "editor.formatOnSave": true,
+    "ruff.organizeImports": false,
+    // Language-specific
+    "[python]": {
+        // Auto-formatting
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    }
+}
