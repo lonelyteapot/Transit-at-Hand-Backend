@@ -11,12 +11,19 @@
     "isort.args": [],
     "editor.formatOnSave": true,
     "ruff.organizeImports": false,
-    // Language-specific
+    // Python-specific
     "[python]": {
         // Auto-formatting
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
         }
+    },
+    // Prisma-specific
+    "[prisma]": {
+        "editor.rulers": [
+            100
+        ],
+        "editor.defaultFormatter": "Prisma.prisma"
     }
 }

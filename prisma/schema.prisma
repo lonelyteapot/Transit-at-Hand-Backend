@@ -1,0 +1,68 @@
+generator client {
+  provider                    = "prisma-client-py"
+  interface                   = "asyncio"
+  recursive_type_depth        = -1
+  enable_experimental_decimal = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Network {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique
+
+  stops  Stop[]
+  routes Route[]
+}
+
+model Stop {
+  id        String  @id @default(uuid()) @db.Uuid
+  full_name String
+  lat       Decimal
+  lon       Decimal
+
+  network_id String  @db.Uuid
+  network    Network @relation(fields: [network_id], references: [id], onDelete: Cascade)
+
+  routes_stops RouteStop[]
+
+  @@unique([full_name, network_id])
+  @@unique([lat, lon])
+}
+
+model Route {
+  id     String @id @default(uuid()) @db.Uuid
+  number String
+
+  network_id String  @db.Uuid
+  network    Network @relation(fields: [network_id], references: [id], onDelete: Cascade)
+
+  segments RouteSegment[]
+
+  @@unique([number, network_id])
+}
+
+model RouteSegment {
+  id String @id @default(uuid()) @db.Uuid
+
+  route_id String @db.Uuid
+  route    Route  @relation(fields: [route_id], references: [id], onDelete: Cascade)
+
+  route_stops RouteStop[]
+}
+
+model RouteStop {
+  segment_id String       @db.Uuid
+  segment    RouteSegment @relation(fields: [segment_id], references: [id], onDelete: Cascade)
+
+  stop_id String @db.Uuid
+  stop    Stop   @relation(fields: [stop_id], references: [id], onDelete: Restrict)
+
+  order Int
+
+  @@id([segment_id, stop_id])
+  @@unique([segment_id, order])
+}
