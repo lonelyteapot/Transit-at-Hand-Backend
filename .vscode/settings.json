@@ -8,9 +8,8 @@
     "python.testing.pytestEnabled": true,
     // Auto-formatting
     "black-formatter.args": [],
-    "isort.args": [],
     "editor.formatOnSave": true,
-    "ruff.organizeImports": false,
+    "ruff.organizeImports": true,
     // Python-specific
     "[python]": {
         // Auto-formatting
